@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/slack-management/static/js/main.f9250995.chunk.js",
+    "main.js.map": "/slack-management/static/js/main.f9250995.chunk.js.map",
+    "runtime-main.js": "/slack-management/static/js/runtime-main.3f747ce3.js",
+    "runtime-main.js.map": "/slack-management/static/js/runtime-main.3f747ce3.js.map",
+    "static/css/2.91bfdee9.chunk.css": "/slack-management/static/css/2.91bfdee9.chunk.css",
+    "static/js/2.8d182d49.chunk.js": "/slack-management/static/js/2.8d182d49.chunk.js",
+    "static/js/2.8d182d49.chunk.js.map": "/slack-management/static/js/2.8d182d49.chunk.js.map",
+    "index.html": "/slack-management/index.html",
+    "static/css/2.91bfdee9.chunk.css.map": "/slack-management/static/css/2.91bfdee9.chunk.css.map",
+    "static/js/2.8d182d49.chunk.js.LICENSE.txt": "/slack-management/static/js/2.8d182d49.chunk.js.LICENSE.txt",
+    "static/media/font-awesome.min.css": "/slack-management/static/media/fontawesome-webfont.f691f37e.woff",
+    "static/media/logo.31df0ce8.svg": "/slack-management/static/media/logo.31df0ce8.svg",
+    "static/media/slack.15141ce1.svg": "/slack-management/static/media/slack.15141ce1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3f747ce3.js",
+    "static/css/2.91bfdee9.chunk.css",
+    "static/js/2.8d182d49.chunk.js",
+    "static/js/main.f9250995.chunk.js"
+  ]
+}
