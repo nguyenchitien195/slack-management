@@ -1,5 +1,13 @@
 import React from "react";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  HashRouter,
+  Route,
+  Switch,
+  Redirect,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 
 // components
 import Layout from "./Layout";
@@ -7,13 +15,13 @@ import Layout from "./Layout";
 // pages
 import Error from "../pages/error";
 import Login from "../pages/login";
+import Auth from "../pages/auth/Auth";
 
 // context
-import { useUserState } from "../context/UserContext";
+import useAuth from "../pages/auth/useAuth";
 
 export default function App() {
-  // global
-  var { isAuthenticated } = useUserState();
+  const { isAuthenticated } = useAuth();
 
   return (
     <HashRouter>
@@ -26,6 +34,7 @@ export default function App() {
         />
         <PrivateRoute path="/app" component={Layout} />
         <PublicRoute path="/login" component={Login} />
+        <PublicRoute path="/auth" component={Auth} />
         <Route component={Error} />
       </Switch>
     </HashRouter>
@@ -37,7 +46,7 @@ export default function App() {
     return (
       <Route
         {...rest}
-        render={props =>
+        render={(props) =>
           isAuthenticated ? (
             React.createElement(component, props)
           ) : (
@@ -59,7 +68,7 @@ export default function App() {
     return (
       <Route
         {...rest}
-        render={props =>
+        render={(props) =>
           isAuthenticated ? (
             <Redirect
               to={{

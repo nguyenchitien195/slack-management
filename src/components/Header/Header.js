@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -34,7 +36,7 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
-import { useUserDispatch, signOut } from "../../context/UserContext";
+import { signOutAction, getUserInfoAction } from "../../redux/authSlice";
 
 const messages = [
   {
@@ -91,11 +93,17 @@ const notifications = [
 
 export default function Header(props) {
   var classes = useStyles();
+  const dispatch = useDispatch();
+  const {auth, user} = useSelector(state => {
+    const auth = state.auth.auth;
+    const user = state.auth.user;
+    return {auth, user};
+  });
+  const history = useHistory();
 
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
-  var userDispatch = useUserDispatch();
 
   // local
   var [mailMenu, setMailMenu] = useState(null);
@@ -104,6 +112,20 @@ export default function Header(props) {
   var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
+
+  const handleSignOut = () => {
+    dispatch(signOutAction());
+    history.push('/');
+  }
+
+  useEffect(() => {
+    if (!user) {
+      const token = auth.authed_user.access_token;
+      const userId = auth.authed_user.id;
+      dispatch(getUserInfoAction(token, userId));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -137,7 +159,7 @@ export default function Header(props) {
           )}
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          React Material Admin
+          {`${user?.name}`}
         </Typography>
         <div className={classes.grow} />
         <div
@@ -288,7 +310,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
+              {user?.name}
             </Typography>
             <Typography
               className={classes.profileMenuLink}
@@ -327,7 +349,7 @@ export default function Header(props) {
             <Typography
               className={classes.profileMenuLink}
               color="primary"
-              onClick={() => signOut(userDispatch, props.history)}
+              onClick={handleSignOut}
             >
               Sign Out
             </Typography>
