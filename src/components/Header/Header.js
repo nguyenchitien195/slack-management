@@ -316,9 +316,10 @@ export default function Header(props) {
               className={classes.profileMenuLink}
               component="a"
               color="primary"
-              href="https://flatlogic.com"
+              href={`https://${auth?.team?.name}.slack.com`}
+              target='_blank'
             >
-              Flalogic.com
+              {`${auth?.team?.name}.slack.com`}
             </Typography>
           </div>
           <MenuItem
