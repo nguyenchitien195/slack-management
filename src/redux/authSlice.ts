@@ -20,10 +20,17 @@ interface IAuth {
     enterprise: null;
     is_enterprise_install: boolean;
   } | null;
+  token: string;
   user: Object | null;
 }
 
-var initValue: IAuth = { isLoading: false, auth: null, error: "", user: null };
+var initValue: IAuth = {
+  isLoading: false,
+  auth: null,
+  token: "",
+  error: "",
+  user: null,
+};
 
 const authSlice = createSlice({
   initialState: initValue,
@@ -33,7 +40,13 @@ const authSlice = createSlice({
       return { ...state, isLoading: true };
     },
     success: (state, action) => {
-      return { ...state, isLoading: false, auth: action.payload, error: "" };
+      return {
+        ...state,
+        isLoading: false,
+        auth: action.payload,
+        token: action.payload.authed_user.access_token,
+        error: "",
+      };
     },
     error: (state, action) => {
       return { ...state, isLoading: false, error: action.payload };

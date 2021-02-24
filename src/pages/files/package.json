@@ -1,6 +1,6 @@
 {
-  "name": "Tables",
+  "name": "Files",
   "version": "0.0.0",
-  "main": "Tables.js",
+  "main": "Files.js",
   "private": true
 }
