@@ -20,3 +20,10 @@ export const getUserInfo = async (
     user: userId,
   });
 };
+
+export const getFiles = async (
+  token: string,
+): Promise<any> => {
+  const web = new WebClient(token);
+  return web.files.list({count: 5});
+}
